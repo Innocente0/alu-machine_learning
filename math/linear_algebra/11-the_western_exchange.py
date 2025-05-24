@@ -6,6 +6,9 @@ Provides np_transpose(matrix), which returns the transpose of a NumPy ndarray.
 """
 
 
+import numpy as np
+
+
 def np_transpose(matrix):
     """
     Transpose the given array and return the result.
