@@ -6,7 +6,6 @@ Provides mat_mul(mat1, mat2) to multiply two 2D matrices.
 Returns a new matrix, or None if dimensions are incompatible.
 """
 
-
 def mat_mul(mat1, mat2):
     """
     Multiply two 2D matrices mat1 and mat2.
@@ -36,4 +35,3 @@ def mat_mul(mat1, mat2):
         result.append(new_row)
 
     return result
-
