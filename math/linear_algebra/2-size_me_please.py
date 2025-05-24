@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+"""
+module: 2-size_me_please
+
+Provides a single function, matrix_shape(matrix),
+which returns the dimensions of a nested list (matrix)
+as a list of integers.
+"""
+
 
 def matrix_shape(matrix):
     shape = []
@@ -12,16 +20,16 @@ def matrix_shape(matrix):
 
 
 if __name__ == "__main__":
-    # demo / manual test code only runs when you do `python3 2-main.py`
+    
     mat1 = [[1, 2], [3, 4]]
-    print(matrix_shape(mat1))         # prints [2, 2]
+    print(matrix_shape(mat1))
 
     mat2 = [
-      [[1, 2, 3, 4, 5],
-       [6, 7, 8, 9, 10],
-       [11, 12, 13, 14, 15]],
-      [[16, 17, 18, 19, 20],
-       [21, 22, 23, 24, 25],
-       [26, 27, 28, 29, 30]]
+        [[1, 2, 3, 4, 5],
+         [6, 7, 8, 9, 10],
+         [11, 12, 13, 14, 15]],
+        [[16, 17, 18, 19, 20],
+         [21, 22, 23, 24, 25],
+         [26, 27, 28, 29, 30]]
     ]
-    print(matrix_shape(mat2))         # prints [2, 3, 5]
+    print(matrix_shape(mat2))
