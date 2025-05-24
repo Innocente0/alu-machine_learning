@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def matrix_shape(matrix):
     """
     Returns a list of the sizes of each dimension of `matrix`.
