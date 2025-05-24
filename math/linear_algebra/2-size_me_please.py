@@ -10,6 +10,7 @@ def matrix_shape(matrix):
         current = current[0]
     return shape
 
+
 if __name__ == "__main__":
     # demo / manual test code only runs when you do `python3 2-main.py`
     mat1 = [[1, 2], [3, 4]]
