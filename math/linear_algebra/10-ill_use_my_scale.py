@@ -6,6 +6,7 @@ Provides np_shape(matrix), which returns the shape of a NumPy ndarray
 as a tuple of integers.
 """
 
+
 def np_shape(matrix):
     """
     Return the shape of a NumPy ndarray.
