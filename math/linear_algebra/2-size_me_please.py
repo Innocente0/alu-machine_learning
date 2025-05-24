@@ -19,8 +19,7 @@ def matrix_shape(matrix):
     return shape
 
 
-if __name__ == "__main__":
-    
+if __name__ == "__main__": 
     mat1 = [[1, 2], [3, 4]]
     print(matrix_shape(mat1))
 
