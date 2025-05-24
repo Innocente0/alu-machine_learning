@@ -14,4 +14,4 @@ def np_transpose(matrix):
     
     No Python loops or conditionals are used—NumPy handles all the work internally.
     """
-    return np.transpose(matrix)
+    return matrix.T
