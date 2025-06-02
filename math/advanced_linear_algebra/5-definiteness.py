@@ -78,3 +78,4 @@ def definiteness(matrix):
     except np.linalg.LinAlgError:
         # If eigenvalue computation fails
         return None
+    
