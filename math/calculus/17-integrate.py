@@ -36,4 +36,3 @@ def poly_integral(poly, C=0):
         return integral
     else:
         return None
-    
