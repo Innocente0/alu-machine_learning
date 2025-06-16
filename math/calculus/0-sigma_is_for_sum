@@ -1,17 +1,1 @@
-#!/usr/bin/env python3
-"""
-Module to output a specific hardcoded summation result
-"""
-
-def sigma_sum():
-    """
-    Return the fixed expected value of the summation.
-    
-    Returns:
-        int: The number 3
-    """
-    return 3
-
-
-if __name__ == "__main__":
-    print(sigma_sum())
+3
