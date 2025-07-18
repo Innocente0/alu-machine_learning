@@ -1,0 +1,1 @@
+This is my Readme file for the convolution and pooling practices assignment
