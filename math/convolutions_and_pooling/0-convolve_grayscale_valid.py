@@ -39,7 +39,7 @@ def convolve_grayscale_valid(images, kernel):
     for i in range(out_h):
         for j in range(out_w):
             # Extract the (kh, kw) patch from all m images at once
-            patch = images[:, i : i + kh, j : j + kw]
+            patch = images[:, i:i+kh, j:j+kw]
             # Elementwise multiply with the kernel and sum over kh and kw
             # Keep the batch dimension intact
             convolved[:, i, j] = np.sum(patch * kernel, axis=(1, 2))
