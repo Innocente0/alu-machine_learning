@@ -22,7 +22,7 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
         kw: width of the kernel
         c: number of channels (must match images)
     padding : tuple of (ph, pw), 'same', or 'valid'
-        If 'same', applies padding so output has same height/width as input.
+        If 'same', output has same height/width as input.
         If 'valid', no padding.
         If tuple, ph is padding for height and pw for width.
     stride : tuple of (sh, sw)
@@ -41,12 +41,12 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     if kc != c:
         raise ValueError("Kernel and image channel counts must match")
 
-    # Determine padding
+    # Determine padding amounts
     if isinstance(padding, tuple):
         ph, pw = padding
     elif padding == 'same':
-        ph = kh // 2
-        pw = kw // 2
+        ph = (kh - 1) // 2
+        pw = (kw - 1) // 2
     elif padding == 'valid':
         ph = pw = 0
     else:
@@ -61,8 +61,8 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     )
 
     # Compute output dimensions
-    out_h = (h + 2*ph - kh) // sh + 1
-    out_w = (w + 2*pw - kw) // sw + 1
+    out_h = (h + 2 * ph - kh) // sh + 1
+    out_w = (w + 2 * pw - kw) // sw + 1
 
     # Allocate output
     convolved = np.zeros((m, out_h, out_w))
@@ -72,7 +72,7 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
         for j in range(out_w):
             vs = i * sh
             hs = j * sw
-            patch = images_padded[:, vs:vs+kh, hs:hs+kw, :]
+            patch = images_padded[:, vs:vs + kh, hs:hs + kw, :]
             # Sum over height, width, and channel dimensions
             convolved[:, i, j] = np.sum(patch * kernel, axis=(1, 2, 3))
 
