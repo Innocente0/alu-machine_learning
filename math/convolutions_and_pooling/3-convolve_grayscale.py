@@ -30,8 +30,8 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
 
     Returns
     -------
-    convolved : numpy.ndarray of shape
-        (m, out_h, out_w) containing the convolved images
+    numpy.ndarray of shape (m, out_h, out_w)
+        The batch of convolved images.
     """
     m, h, w = images.shape
     kh, kw = kernel.shape
@@ -44,8 +44,7 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
         ph = kh // 2
         pw = kw // 2
     elif padding == 'valid':
-        ph = 0
-        pw = 0
+        ph = pw = 0
     else:
         raise ValueError("padding must be 'same', 'valid', or a tuple")
 
@@ -61,17 +60,15 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     out_h = (h + 2*ph - kh) // sh + 1
     out_w = (w + 2*pw - kw) // sw + 1
 
-    # Initialize output
+    # Allocate output
     convolved = np.zeros((m, out_h, out_w))
 
-    # Convolution with two loops over output spatial dimensions
+    # Convolve using exactly two loops
     for i in range(out_h):
         for j in range(out_w):
             vs = i * sh
-            ve = vs + kh
             hs = j * sw
-            he = hs + kw
-            patch = images_padded[:, vs:ve, hs:he]
+            patch = images_padded[:, vs:vs+kh, hs:hs+kw]
             convolved[:, i, j] = np.sum(patch * kernel, axis=(1, 2))
 
     return convolved
