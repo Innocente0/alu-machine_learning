@@ -2,8 +2,6 @@
 """Defines a single neuron for binary classification (initialization only)."""
 
 import numpy as np
-
-
 class Neuron:
     """Single neuron performing binary classification (parameters only)."""
 
