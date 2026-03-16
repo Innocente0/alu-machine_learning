@@ -82,7 +82,9 @@ def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
 
         Transition = np.sum(xi, axis=2) / np.sum(gamma, axis=1)[:, np.newaxis]
 
-        gamma_full = np.hstack((gamma, np.sum(xi[:, :, T - 2], axis=0)[:, None]))
+        gamma_full = np.hstack(
+    (gamma, np.sum(xi[:, :, T - 2], axis=0)[:, None])
+)
 
         for j in range(N):
             Emission[:, j] = np.sum(
