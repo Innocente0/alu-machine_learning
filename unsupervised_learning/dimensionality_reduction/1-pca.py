@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PCA transformation module"""
+"""PCA module"""
 
 import numpy as np
 
@@ -12,7 +12,7 @@ def pca(X, ndim):
         return None
 
     X_centered = X - np.mean(X, axis=0)
-    U, S, _ = np.linalg.svd(X_centered, full_matrices=False)
+    U, S, Vt = np.linalg.svd(X_centered, full_matrices=False)
     T = U[:, :ndim] * S[:ndim]
 
     return T
