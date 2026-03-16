@@ -7,7 +7,7 @@ expectation_maximization = __import__('8-EM').expectation_maximization
 
 
 def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
-    """finds the best number of clusters for a GMM using BIC"""
+    """finds the best number of clusters for a GMM using the BIC"""
     if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None, None, None, None
     if not isinstance(kmin, int) or kmin <= 0:
@@ -29,8 +29,8 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
     ks = np.arange(kmin, kmax + 1)
 
     results = []
-    log_likelihoods = []
-    bics = []
+    l = []
+    b = []
 
     for k in ks:
         pi, m, S, _, log_likelihood = expectation_maximization(
@@ -39,18 +39,18 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         if pi is None or m is None or S is None or log_likelihood is None:
             return None, None, None, None
 
-        p = k * d + k * d * (d + 1) / 2 + k - 1
+        p = k * d + k * d * (d + 1) / 2 + (k - 1)
         bic = p * np.log(n) - 2 * log_likelihood
 
         results.append((pi, m, S))
-        log_likelihoods.append(log_likelihood)
-        bics.append(bic)
+        l.append(log_likelihood)
+        b.append(bic)
 
-    log_likelihoods = np.array(log_likelihoods)
-    bics = np.array(bics)
+    l = np.array(l)
+    b = np.array(b)
 
-    best_idx = np.argmin(bics)
+    best_idx = np.argmin(b)
     best_k = ks[best_idx]
     best_result = results[best_idx]
 
-    return best_k, best_result, log_likelihoods, bics
+    return best_k, best_result, l, b
