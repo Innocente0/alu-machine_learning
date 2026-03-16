@@ -10,8 +10,7 @@ def pca(X, var=0.95):
         return None
 
     _, s, vh = np.linalg.svd(X, full_matrices=False)
-    explained_variance = np.cumsum(s ** 2) / np.sum(s ** 2)
-    nd = np.searchsorted(explained_variance, var, side='right') + 1
+    cumulative = np.cumsum(s ** 2) / np.sum(s ** 2)
+    nd = np.argmax(cumulative > var) + 1
 
-    W = vh.T[:, :nd]
-    return W
+    return vh.T[:, :nd]
