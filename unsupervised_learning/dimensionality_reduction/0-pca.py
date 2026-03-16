@@ -9,8 +9,8 @@ def pca(X, var=0.95):
     if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None
 
-    _, s, vh = np.linalg.svd(X, full_matrices=False)
-    cumulative = np.cumsum(s ** 2) / np.sum(s ** 2)
-    nd = np.argmax(cumulative > var) + 1
+    _, s, vh = np.linalg.svd(X)
+    cumulative = np.cumsum(s) / np.sum(s)
+    nd = np.where(cumulative >= var)[0][0] + 1
 
     return vh.T[:, :nd]
