@@ -20,15 +20,19 @@ def expectation(X, pi, m, S):
     n, d = X.shape
     k = pi.shape[0]
 
-    if m.shape != (k, d) or S.shape != (k, d, d):
+    if k < 1 or m.shape != (k, d) or S.shape != (k, d, d):
         return None, None
     if not np.isclose(np.sum(pi), 1):
         return None, None
 
-    probs = np.array([pi[i] * pdf(X, m[i], S[i]) for i in range(k)])
-    if np.any(probs is None):
-        return None, None
+    probs = []
+    for i in range(k):
+        P = pdf(X, m[i], S[i])
+        if P is None:
+            return None, None
+        probs.append(pi[i] * P)
 
+    probs = np.array(probs)
     total = np.sum(probs, axis=0)
     g = probs / total
     l = np.sum(np.log(total))
